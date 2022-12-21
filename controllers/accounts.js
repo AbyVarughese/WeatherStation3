@@ -1,0 +1,79 @@
+"use strict";
+
+const userstore = require("../models/user-store");
+const logger = require("../utils/logger");
+const uuid = require("uuid");
+
+const accounts = {
+  index(request, response) {
+    const viewData = {
+      title: "Login or Signup"
+    };
+    response.render("index", viewData);
+  },
+
+  login(request, response) {
+    const viewData = {
+      title: "Login to the Service"
+    };
+    response.render("login", viewData);
+  },
+
+  logout(request, response) {
+    response.cookie("station", "");
+    response.redirect("/");
+  },
+
+  signup(request, response) {
+    const viewData = {
+      title: "Login to the Service"
+    };
+    response.render("signup", viewData);
+  },
+
+  register(request, response) {
+    const user = request.body;
+    user.id = uuid.v1();
+    userstore.addUser(user);
+    logger.info(`registering ${user.email}`);
+    response.redirect("/");
+  },
+
+  authenticate(request, response) {
+    const user = userstore.getUserByEmail(request.body.email);
+    if (user) {
+      response.cookie("station", user.email);
+      logger.info(`logging in ${user.email}`);
+      response.redirect("/dashboard");
+    } else {
+      response.redirect("/login");
+    }
+  },
+
+  getCurrentUser(request) {
+    const userEmail = request.cookies.station;
+    return userstore.getUserByEmail(userEmail);
+  },
+
+  account (request, response) {
+    const userEmail = request.cookies.station;
+    const account = userstore.getUserByEmail(userEmail);
+
+    const viewData = {
+      title: "Login to the Service",
+      account: account,
+    };
+    response.render("account", viewData);
+
+  },
+
+  edit (request, response) {
+    const userEmail = request.cookies.station;
+    userstore.updateAccount(userEmail, request.body.firstname, request.body.lastname);
+    response.redirect("/account");
+
+  }
+
+};
+
+module.exports = accounts;
