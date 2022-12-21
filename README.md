@@ -1,4 +1,4 @@
-Welcome to the Weatherstation 2.0
+Welcome to the Weatherstation 3.0
 =========================
 
-Version 2 of the Weatherstation application
+Version 3 of the Weatherstation application
