@@ -30,7 +30,7 @@ while True:
     with open(data_file, "a") as f:
       #write header if file does not exist
       if is_new_file:
-        f.write("timestamp,humidity,temp_hunidity,pressure,temp_pressure\n")
+        f.write("timestamp,humidity,temp_humidity,pressure,temp_pressure\n")
 
       #write sensory values into csv database
       f.write(f"{ts},{humidity},{temph},{pressure},{tempp}\n")
