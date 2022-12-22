@@ -3,5 +3,5 @@
 	"ntfy_url": "https://ntfy.sh/WIT_Aby_20034187",
 	"weather_api": "https://api.openweathermap.org/data/2.5/weather?lat=54.45367&lon=-46.42367&appid=018ff37f1d07f2f78ec77f30abe6e743&units=metric",
 	"temp_low": 17,
-	"temp_high": 30
+	"temp_high": 25
 }
